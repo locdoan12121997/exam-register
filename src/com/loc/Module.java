@@ -10,15 +10,14 @@ import java.sql.ResultSet;
 
 import org.json.JSONObject;
 
-@Path("/students")
-public class Student {
+@Path("/module")
+public class Module {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentList() {
+	public Response getModuleList() {
 		try {
             Main.establishConnection();
-	        String query = "CALL GetStudents();";	
-	        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	        String query = "CALL GetAllModulesDetails();";	
 	        ResultSet resultSet = Main.getResultSet(query);
 	        System.out.println(resultSet);
 	        JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
@@ -31,11 +30,11 @@ public class Student {
 	}
 	
 	@GET
-	@Path("/{studentId}")
+	@Path("/{moduleId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getEmployee(@PathParam("studentId") int studentId) {
+	public Response getModules(@PathParam("moduleId") int moduleId) {
 		try {
-            String query = String.format("CALL GetStudentById(%d);", studentId);
+            String query = String.format("CALL GetModuleById(%d);", moduleId);
             ResultSet resultSet = Main.getResultSet(query);
             JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
             resultSet.close();
@@ -47,20 +46,5 @@ public class Student {
         }
 	}
 	
-	@GET
-	@Path("/{studentId}/modules")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getModulebyStudentID(@PathParam("studentId") int studentId) {
-		try {
-            String query = String.format("CALL GetModulesByStudentId(%d);", studentId);
-            ResultSet resultSet = Main.getResultSet(query);
-            JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
-            resultSet.close();
-			return Response.ok().entity(jsonObject.toString()).build();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-	}
+	
 }

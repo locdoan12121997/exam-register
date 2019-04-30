@@ -10,15 +10,14 @@ import java.sql.ResultSet;
 
 import org.json.JSONObject;
 
-@Path("/students")
-public class Student {
+@Path("/lecturer")
+public class Lecturer {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStudentList() {
+	public Response getLecturerList() {
 		try {
             Main.establishConnection();
-	        String query = "CALL GetStudents();";	
-	        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	        String query = "CALL GetLecturers();";	
 	        ResultSet resultSet = Main.getResultSet(query);
 	        System.out.println(resultSet);
 	        JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
@@ -29,30 +28,13 @@ public class Student {
             return null;
 		}
 	}
-	
+		
 	@GET
-	@Path("/{studentId}")
+	@Path("/{lecturerId}/modules")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getEmployee(@PathParam("studentId") int studentId) {
+	public Response getModulebyLecturerID(@PathParam("lecturerId") int lecturerId) {
 		try {
-            String query = String.format("CALL GetStudentById(%d);", studentId);
-            ResultSet resultSet = Main.getResultSet(query);
-            JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
-            resultSet.close();
-			return Response.ok().entity(jsonObject.toString()).build();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-	}
-	
-	@GET
-	@Path("/{studentId}/modules")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getModulebyStudentID(@PathParam("studentId") int studentId) {
-		try {
-            String query = String.format("CALL GetModulesByStudentId(%d);", studentId);
+            String query = String.format("CALL GetModulesByLecturerId(%d);", lecturerId);
             ResultSet resultSet = Main.getResultSet(query);
             JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
             resultSet.close();
@@ -64,3 +46,4 @@ public class Student {
         }
 	}
 }
+
