@@ -66,6 +66,22 @@ public class Assistant {
             return null;
         }
     }
+
+    @UPDATE
+    @Path("/{assistantId}")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response UpdateAssistantAccount(@PathParam("assistantId") int assistantId, @FormParam("username") String userName, @FormParam("password") String userPassword, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName){
+        try {
+            Main.establishConnection();
+            String query = String.format("CALL CreateAssistantAccount('%s', '%s', '%s', '%s');", userName, userPassword, firstName, lastName);
+            Main.getResultSet(query).close();
+            return Response.ok().build();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 	
 	@DELETE
 	@Path("/{assistantId}")

@@ -1,11 +1,8 @@
 package com.loc;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.PathParam;
 import java.sql.ResultSet;
 
 import org.json.JSONObject;
@@ -61,5 +58,22 @@ public class Student {
             e.printStackTrace();
             return null;
         }
+	}
+
+	@PUT
+	@Path("/{studentId}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response updateStudentCode(@PathParam("studentId") int studentId, @FormParam("studentCode") String studentCode){
+		try {
+			Main.establishConnection();
+			String query = String.format("CALL UpdateStudentCode('%d', '%s');", studentId, studentCode);
+			Main.getResultSet(query).close();
+			
+			return Response.ok().build();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
