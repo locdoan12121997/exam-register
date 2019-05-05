@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 import org.json.JSONObject;
 
-@Path("/semester")
+@Path("/semesters")
 public class Semester {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class Semester {
 	@GET
 	@Path("/{semesterId}/exams")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getExambyID(@PathParam("semesterId") int semesterId) {
+	public Response getExambySemesterId(@PathParam("semesterId") int semesterId) {
 		try {
             String query = String.format("CALL GetExamBySemesterId(%d);", semesterId);
             ResultSet resultSet = Main.getResultSet(query);

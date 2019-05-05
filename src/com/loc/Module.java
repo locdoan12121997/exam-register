@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 import org.json.JSONObject;
 
-@Path("/module")
+@Path("/modules")
 public class Module {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

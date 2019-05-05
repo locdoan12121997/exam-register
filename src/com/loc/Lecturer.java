@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 import org.json.JSONObject;
 
-@Path("/lecturer")
+@Path("/lecturers")
 public class Lecturer {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -26,6 +26,23 @@ public class Lecturer {
 		}catch (Exception e) {
             e.printStackTrace();
             return null;
+		}
+	}
+
+	@GET
+	@Path("/{lecturerId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getLecturerById(@PathParam("lecturerId") int lecturerId) {
+		try {
+			String query = String.format("CALL GetLecturerById(%d);", lecturerId);
+			ResultSet resultSet = Main.getResultSet(query);
+			JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
+			resultSet.close();
+			return Response.ok().entity(jsonObject.toString()).build();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 		

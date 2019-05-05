@@ -18,7 +18,6 @@ public class Student {
 		try {
             Main.establishConnection();
 	        String query = "CALL GetStudents();";	
-	        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	        ResultSet resultSet = Main.getResultSet(query);
 	        System.out.println(resultSet);
 	        JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
