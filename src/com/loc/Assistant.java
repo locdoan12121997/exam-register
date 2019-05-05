@@ -4,6 +4,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -52,30 +53,33 @@ public class Assistant {
     }
 	
 	@POST
-	@Path("/createassistant")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void CreateAssistantAccount(@FormParam("username") String userName, @FormParam("password") String userPassword, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName){
+    public Response CreateAssistantAccount(@FormParam("username") String userName, @FormParam("password") String userPassword, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName){
         try {
         	Main.establishConnection();
             String query = String.format("CALL CreateAssistantAccount('%s', '%s', '%s', '%s');", userName, userPassword, firstName, lastName);
             Main.getResultSet(query).close();
-        }
+            return Response.ok().status(201).build();
+    }
         catch (Exception e){
             e.printStackTrace();
+            return null;
         }
     }
 	
-	@POST
-	@Path("/deleteassistant")
+	@DELETE
+	@Path("/{assistantId}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public static void DeleteAssistantAccount(@FormParam("assistantId") int assistantId){
+    public Response DeleteAssistantAccount(@PathParam("assistantId") int assistantId){
         try {
         	Main.establishConnection();
             String query = String.format("CALL DeleteAssistantAccount(%d);", assistantId);
             Main.getResultSet(query).close();
+            return Response.ok().status(204).build();
         }
         catch (Exception e){
             e.printStackTrace();
+            return null;
         }
     }
 }
