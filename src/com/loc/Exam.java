@@ -8,43 +8,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.PathParam;
 import java.sql.ResultSet;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Path("/exams")
 public class Exam {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getExamList() {
-		try {
-            Main.establishConnection();
-	        String query = "CALL GetExams();";	
-	        ResultSet resultSet = Main.getResultSet(query);
-	        System.out.println(resultSet);
-	        JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
-	        resultSet.close();
-			return Response.ok().entity(jsonObject.toString()).build();
-		}catch (Exception e) {
-            e.printStackTrace();
-            return null;
-		}
+	public Response getExamList() throws Exception{
+		String query = "CALL GetExams();";	
+		JSONArray jsonArray = Main.getQueryArray(query);
+		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
 	@GET
 	@Path("/{examId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getExambyID(@PathParam("examId") int examId) {
-		try {
-            String query = String.format("CALL GetExamById(%d);", examId);
-            ResultSet resultSet = Main.getResultSet(query);
-            JSONObject jsonObject = JsonSerializer.convertToJSON(resultSet);
-            resultSet.close();
-			return Response.ok().entity(jsonObject.toString()).build();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+	public Response getExambyID(@PathParam("examId") int examId) throws Exception{
+		String query = String.format("CALL GetExamById(%d);", examId);
+		JSONArray jsonArray = Main.getQueryArray(query);
+		return Response.ok().entity(jsonArray.toString()).build();
 	}
-	
-	
 }

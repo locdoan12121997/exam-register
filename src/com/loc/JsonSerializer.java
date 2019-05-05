@@ -7,7 +7,7 @@ import java.io.FileWriter;
 
 public class JsonSerializer {
 
-    public static JSONObject convertToJSON(ResultSet resultSet) throws Exception {
+    public static JSONArray convertToJSON(ResultSet resultSet) throws Exception {
         JSONArray jsonArray = new JSONArray();
         while (resultSet.next()) {
             int total_rows = resultSet.getMetaData().getColumnCount();
@@ -25,9 +25,7 @@ public class JsonSerializer {
             }
             jsonArray.put(obj);
         }
-        JSONObject result = new JSONObject();
-        result.put("data", jsonArray);
-        return result;
+        return jsonArray;
     }
 
     public static void writeToJSONFile(JSONArray[] resultArray, String filepath) throws Exception{
