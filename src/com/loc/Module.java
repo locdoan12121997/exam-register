@@ -18,15 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Path("/modules")
-public class Module {
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getModuleList() throws Exception {
-		String query = "CALL GetAllModulesDetails();";
-		JSONArray jsonArray = Util.getQueryArray(query);
-		return Response.ok().entity(jsonArray.toString()).build();
-	}
-		
+public class Module {		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getModuleList(@DefaultValue("false") @QueryParam("overlap") boolean overlap) throws Exception{
