@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="formstyle.css">
+    <script src="jsform.js"></script>
+
+
+</head>
+<body>
+
+
+<button class="add-button" onclick="openForm()">update</button>
+
+<div class="form-popup" id="add-form">
+  <form class="form-container">
+    <h1>update student</h1>
+    <lable>f-name</lable>
+    <br>
+    <input type="text" id="f-name" >
+    <br>
+    <lable>l-name</lable>
+    <br>
+    <input type="text" id="l-name">
+    <br/>
+    <lable>st-code</lable>
+    <br>
+    <input type="text" id="st-code" >
+    <br>
+    <lable>username</lable>
+    <br>
+    <input type="text" id="username" >
+    <br>
+    <lable>password</lable>
+    <br>
+    <input type="text" id="password" >
+    <br>
+    <button type="button" id="btn">Update</button>
+    <button type="button" id="btn-cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+
+
+
+</body>
+</html>
+<script>
+function openForm() {
+  document.getElementById("add-form").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("add-form").style.display = "none";
+}
+</script>

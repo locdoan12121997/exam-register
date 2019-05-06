@@ -104,8 +104,6 @@ public class Module {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject studentObject = jsonArray.getJSONObject(i);
 			int studentId = studentObject.getInt("id");
-			System.out.println(studentId);
-			System.out.println("aaaaaaaaaaaaaaaaa");
 		}
 		
 		

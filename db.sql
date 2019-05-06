@@ -382,7 +382,7 @@ END$$
 --  Student can view the module enrollment list
 CREATE PROCEDURE GetEnrollsByModuleId(IN module_id INTEGER)
 BEGIN
-    SELECT Student.*, Account.*
+    SELECT DISTINCT Student.*, Account.*
     FROM Student
     JOIN ModuleList ON Student.id = ModuleList.studentId
     JOIN Account ON Student.accountId = Account.id
