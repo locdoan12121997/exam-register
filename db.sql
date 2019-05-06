@@ -269,6 +269,13 @@ BEGIN
     WHERE lecturerId = lecturer_id;
 END$$
 
+CREATE PROCEDURE GetModulesBySemesterId(IN semester_id INTEGER)
+BEGIN
+	SELECT *
+	FROM Module
+	WHERE Module.semesterId = semester_id;
+END$$
+
 -- -- Create a lecturer account ??
 CREATE PROCEDURE CreateLecturerAccount(IN user_name VARCHAR(255), IN user_password VARCHAR(255), IN first_name VARCHAR(255), IN last_name VARCHAR(255))
 BEGIN
@@ -466,7 +473,7 @@ BEGIN
     WHERE id = session_id;
 END$$
 
-CREATE PROCEDURE GetModuleSessions(I)
+CREATE PROCEDURE GetModuleSessions()
 BEGIN
     SELECT *
     FROM ModuleSession;
@@ -649,10 +656,10 @@ END$$
 
 CREATE PROCEDURE GetModuleSessionByLecturerIDModuleId(IN module_id INTEGER, IN lecturer_id INTEGER)
 BEGIN
-    SELECT Modulesession.*
+    SELECT ModuleSession.*
     FROM ModuleSession
     JOIN LecturerModule ON LecturerModule.moduleId = ModuleSession.moduleId
-    WHERE Module.id = module_id AND LecturerModule.lecturerId = lecturer_id;
+    WHERE ModuleSession.moduleId = module_id AND LecturerModule.lecturerId = lecturer_id;
 END$$
 
 DELIMITER ;

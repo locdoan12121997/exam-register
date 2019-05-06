@@ -1,5 +1,6 @@
 package com.loc;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -35,15 +36,15 @@ public class Exam {
 	
 	@PUT
 	@Path("/{examId}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateExam(@PathParam("examId") int examId, com.model.Exam exam) throws Exception{
-		String query = String.format("CALL UpdateExam(%d,'%s', '%s','%s', '%s);", examId, exam.getExamDate(), exam.getFromTime(), exam.getToTime(), exam.getDeadline());
+		String query = String.format("CALL UpdateExam(%d,'%s', '%s','%s', '%s');", examId, exam.getExamDate(), exam.getFromTime(), exam.getToTime(), exam.getDeadline());
 		Main.executeQuery(query);
 		return Response.ok().build();
 	}
 	
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createExam(com.model.Exam exam) throws Exception{
 		String query = String.format("CALL CreateExam('%s', '%s', '%s', '%s', %d);", exam.getExamDate(), exam.getFromTime(), exam.getToTime(), exam.getDeadline(), exam.getModuleId());
 		Main.executeQuery(query);
@@ -52,7 +53,10 @@ public class Exam {
 	
 	@DELETE
 	@Path("/{examId}")
+<<<<<<< HEAD
 	@Produces(MediaType.APPLICATION_JSON)
+=======
+>>>>>>> Thang
 	public Response deleteExam(@PathParam("examId") int examId) throws Exception{
 		String query = String.format("CALL DeleteExam(%d);", examId);
 		Main.executeQuery(query);

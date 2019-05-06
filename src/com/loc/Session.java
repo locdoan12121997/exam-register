@@ -25,7 +25,7 @@ public class Session {
 	}
 	
 	@GET
-	@Path("/{sessionsId}")
+	@Path("/{sessionId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSessionById(@PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL GetModuleSessionById(%d);", sessionId);
@@ -44,6 +44,7 @@ public class Session {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSession(com.model.Session session) throws Exception{
 		String query = String.format("CALL CreateModuleSession('%s', '%s', '%s', %d);", session.getSessionDate(), session.getFromTime(), session.getToTime(),  session.getModuleId());
 		Main.executeQuery(query);
@@ -52,7 +53,6 @@ public class Session {
 	
 	@DELETE
 	@Path("/{sessionId}")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSession(@PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL DeleteModuleSession(%d);", sessionId);
 		Main.executeQuery(query);
