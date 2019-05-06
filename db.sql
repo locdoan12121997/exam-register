@@ -466,6 +466,12 @@ BEGIN
     WHERE id = session_id;
 END$$
 
+CREATE PROCEDURE GetModuleSessions(I)
+BEGIN
+    SELECT *
+    FROM ModuleSession;
+END$$
+
 -- View the details of a module session
 CREATE PROCEDURE GetModuleSessionById(IN session_id INTEGER)
 BEGIN

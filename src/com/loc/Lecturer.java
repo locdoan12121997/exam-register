@@ -62,14 +62,8 @@ public class Lecturer {
 	@PUT
 	@Path("/{lecturerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateStudent(com.model.Lecturer lecturer, @PathParam("lecturerId") int lecturerId) throws Exception{
-		String query = String.format("CALL UpdateLecturer(%d, '%s', '%s', '%s', '%s');", 
-				studentId, 
-				student.getUserName(),
-				student.getPassword(),
-				student.getFirstName(),
-				student.getLastName(),
-				student.getCode());
+	public Response updateLecturer(com.model.Lecturer lecturer, @PathParam("lecturerId") int lecturerId) throws Exception{
+		String query = String.format("CALL UpdateLecturer(%d, '%s', '%s', '%s', '%s');", lecturerId, lecturer.getUserName(), lecturer.getPassword(), lecturer.getFirstName(), lecturer.getLastName());
 		Main.executeQuery(query);
 		return Response.ok().build();
 	}
