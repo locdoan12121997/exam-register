@@ -191,12 +191,25 @@ BEGIN
 END$$
 
 
+CREATE PROCEDURE UpdateAccount(IN account_id INTEGER, IN user_name VARCHAR(255), IN user_password VARCHAR(255), IN first_name VARCHAR(255), IN last_name VARCHAR(255))
+BEGIN
+	UPDATE Account
+	SET userName = user_name, userPassword = user_password, firstName = first_name, lastName = last_name
+	WHERE id = account_id;
+END$$
+
 -- Update student code                                                        OK
-CREATE PROCEDURE UpdateStudentCode(IN student_id INTEGER, IN student_code VARCHAR(255))
+CREATE PROCEDURE UpdateStudent(IN student_id INTEGER, IN user_name VARCHAR(255), IN user_password VARCHAR(255), IN first_name VARCHAR(255), IN last_name VARCHAR(255), IN student_code VARCHAR(255))
 BEGIN
     UPDATE Student
     SET code = student_code
     WHERE id = student_id;
+    
+    SELECT @accountId := `accountId` 
+    FROM Student 
+    WHERE id = student_id;
+    
+    CALL UpdateAccount(@accountId, user_name, user_password, first_name, last_name);
 END$$
 
 -- Delete a student from the system                                           OK
@@ -264,6 +277,15 @@ BEGIN
     VALUE (LAST_INSERT_ID());
 END$$
 
+CREATE PROCEDURE UpdateLecturer(IN lecturer_id INTEGER, IN user_name VARCHAR(255), IN user_password VARCHAR(255), IN first_name VARCHAR(255), IN last_name VARCHAR(255))
+BEGIN    
+    SELECT @accountId := `accountId` 
+    FROM Lecturer 
+    WHERE id = lecturer_id;
+    
+    CALL UpdateAccount(@accountId, user_name, user_password, first_name, last_name);
+END$$
+
 -- Delete a lecturer from the system
 CREATE PROCEDURE DeleteLecturerAccount(IN lecturer_id INTEGER)
 BEGIN
@@ -304,6 +326,15 @@ BEGIN
     INNER JOIN Assistant
     ON Account.id = Assistant.accountId
     WHERE Assistant.id = assistant_id;
+END$$
+
+CREATE PROCEDURE UpdateAssistant(IN assistant_id INTEGER, IN user_name VARCHAR(255), IN user_password VARCHAR(255), IN first_name VARCHAR(255), IN last_name VARCHAR(255))
+BEGIN    
+    SELECT @accountId := `accountId` 
+    FROM Assistant 
+    WHERE id = assistant_id;
+    
+    CALL UpdateAccount(@accountId, user_name, user_password, first_name, last_name);
 END$$
 
 --  Assistant login

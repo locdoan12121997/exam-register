@@ -4,6 +4,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -58,6 +59,21 @@ public class Lecturer {
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 
+	@PUT
+	@Path("/{lecturerId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateStudent(com.model.Lecturer lecturer, @PathParam("lecturerId") int lecturerId) throws Exception{
+		String query = String.format("CALL UpdateLecturer(%d, '%s', '%s', '%s', '%s');", 
+				studentId, 
+				student.getUserName(),
+				student.getPassword(),
+				student.getFirstName(),
+				student.getLastName(),
+				student.getCode());
+		Main.executeQuery(query);
+		return Response.ok().build();
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createLecturerAccount(com.model.Lecturer lecturer) throws Exception{
