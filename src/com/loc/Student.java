@@ -21,7 +21,7 @@ public class Student {
 	public Response getStudentList() throws Exception{
 		String query = "CALL GetStudents();";
 		JSONArray jsonArray = Main.getQueryArray(query);
-		return Response.ok().entity(jsonArray.toList()).build();
+		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
 	
