@@ -10,10 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.PathParam;
-import java.sql.ResultSet;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 @Path("/exams")
 public class Exam {
@@ -53,10 +50,7 @@ public class Exam {
 	
 	@DELETE
 	@Path("/{examId}")
-<<<<<<< HEAD
 	@Produces(MediaType.APPLICATION_JSON)
-=======
->>>>>>> Thang
 	public Response deleteExam(@PathParam("examId") int examId) throws Exception{
 		String query = String.format("CALL DeleteExam(%d);", examId);
 		Main.executeQuery(query);
