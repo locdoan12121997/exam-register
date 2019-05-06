@@ -61,5 +61,9 @@ public class Util {
     		connection.close();
     	}
     }
+    
+    public static boolean isQualified(int examId) throws SQLException{
+    	return true;
+    }
 }
 

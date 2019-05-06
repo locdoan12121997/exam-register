@@ -96,7 +96,7 @@ public class Module {
 	@Path("/{moduleId}/examList")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExamList(@PathParam("moduleId") int moduleId) throws Exception {
-		String query = String.format("CALL GetExamsByModuleId(%d);", moduleId);
+		String query = String.format("CALL GetEnrollsByModuleId(%d);", moduleId);
 		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
