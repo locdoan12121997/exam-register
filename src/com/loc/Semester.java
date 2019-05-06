@@ -67,7 +67,7 @@ public class Semester {
 	}
 	
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSemester(com.model.Semester semester) throws Exception{
 		String query = String.format("CALL CreateSemester('%s', '%s');", semester.getFromDate(), semester.getToDate());
 		Main.executeQuery(query);
@@ -76,7 +76,6 @@ public class Semester {
 	
 	@DELETE
 	@Path("/{semesterId}")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteSemester(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL DeleteSemester(%d);", semesterId);
 		Main.executeQuery(query);

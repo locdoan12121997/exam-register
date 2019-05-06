@@ -50,7 +50,7 @@ public class Module {
 	@Path("/{moduleId}/exam")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExamByModuleId(@PathParam("moduleId") int moduleId) throws Exception{
-		String query = String.format("CALL GetExamByModuleId(%d);", moduleId);
+		String query = String.format("CALL GetExamsByModuleId(%d);", moduleId);
 		JSONArray jsonArray = Main.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}

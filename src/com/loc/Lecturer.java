@@ -78,8 +78,7 @@ public class Lecturer {
 
 	@DELETE
 	@Path("/{lecturerId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteLecturerAccount(@FormParam("lecturerId") int lecturerId) throws Exception{
+	public Response deleteLecturerAccount(@PathParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL DeleteLecturerAccount(%d);", lecturerId);
 		Main.executeQuery(query);
 		return Response.ok().status(204).build();	

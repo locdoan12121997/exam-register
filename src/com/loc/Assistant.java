@@ -44,9 +44,17 @@ public class Assistant {
         return Response.ok().status(201).build();
     }
 	
-	@DELETE
+	@PUT
 	@Path("/{assistantId}")
 	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateAssistant(@PathParam("assistantId") int assistantId, com.model.Assistant assistant) throws Exception{
+		String query = String.format("CALL UpdateAssistant(%d, '%s', '%s', '%s', '%s');", assistantId, assistant.getUserName(), assistant.getPassword(), assistant.getFirstName(), assistant.getLastName());
+		Main.executeQuery(query);
+		return Response.ok().status(204).build();
+    }
+	
+	@DELETE
+	@Path("/{assistantId}")
     public Response DeleteAssistantAccount(@PathParam("assistantId") int assistantId) throws Exception{
 		String query = String.format("CALL DeleteAssistantAccount(%d);", assistantId);
 		Main.executeQuery(query);
