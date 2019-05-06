@@ -93,4 +93,20 @@ public class Student {
 		return Response.ok().status(204).build();	
 	}
 	
+	@DELETE
+	@Path("/{studentId}/sessions/{sessionId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteAttendance(@PathParam("studentId") int studentId, @PathParam("sessionId") int sessionId) throws Exception{
+		String query = String.format("CALL DeleteAttendance('%s', '%s');", studentId, sessionId);
+		Util.executeQuery(query);
+		return Response.ok().status(204).build();	
+	}
+	
+	@DELETE
+	@Path("/{studentId}/exams/{examId}")
+	public Response deleteRegister(@PathParam("studentId") int studentId, @PathParam("examId") int examId) throws Exception{
+		String query = String.format("CALL DeleteRegister(%d, %d);", studentId, examId);
+		Util.executeQuery(query);
+		return Response.ok().status(204).build();	
+	}
 }

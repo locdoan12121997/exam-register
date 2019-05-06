@@ -655,6 +655,18 @@ BEGIN
     WHERE ModuleSession.moduleId = module_id;
 END$$
 
+CREATE PROCEDURE GetAttendancePercentByStudentIdModuleId(IN module_id INTEGER, IN student_id INTEGER)
+BEGIN
+	SELECT 100 * SUM(CASE WHEN Attended = "True" then 1 else 0 end) / COUNT(*) Percent
+	FROM (SELECT ModuleSession.*, IF(EXISTS(
+        SELECT *
+        FROM Attendance
+        WHERE Attendance.studentId = student_id AND Attendance.sessionId = ModuleSession.id
+    ), "True", "False") AS Attended
+    FROM ModuleSession
+    WHERE ModuleSession.moduleId = module_id) AS SS;
+END$$ 
+
 CREATE PROCEDURE GetModuleSessionByLecturerIDModuleId(IN module_id INTEGER, IN lecturer_id INTEGER)
 BEGIN
     SELECT ModuleSession.*

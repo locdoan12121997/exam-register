@@ -1,15 +1,7 @@
 package com.model;
 
 public class Register {
-	int id, studentId, examId;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	int studentId, examId;
 
 	public int getStudentId() {
 		return studentId;

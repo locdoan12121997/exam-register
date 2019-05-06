@@ -18,7 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 @Path("/modules")
-public class Module {
+public class Module {		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getModuleList(@DefaultValue("false") @QueryParam("overlap") boolean overlap) throws Exception{
@@ -100,14 +100,16 @@ public class Module {
 	public Response getExamList(@PathParam("moduleId") int moduleId) throws Exception {
 		String query = String.format("CALL GetEnrollsByModuleId(%d);", moduleId);
 		JSONArray jsonArray = Util.getQueryArray(query);
-		JSONArray resultArray = null;
+		JSONArray resultArray = new JSONArray();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject studentObject = jsonArray.getJSONObject(i);
 			int studentId = studentObject.getInt("id");
+			if (Util.isQualified(studentId, moduleId)){
+				resultArray.put(studentObject);
+			}
 		}
 		
-		
-		return Response.ok().entity(jsonArray.toString()).build();
+		return Response.ok().entity(resultArray.toString()).build();
 	}
 
 	@GET

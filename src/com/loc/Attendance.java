@@ -8,23 +8,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path("/attendances")
 public class Attendance {
 	@POST
-	@Path("/attendances")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createAttendance(com.model.Attendance attendance) throws Exception{
 		String query = String.format("CALL CreateAttendance('%s', '%s');", attendance.getStudentId(), attendance.getSessionId());
 		Util.executeQuery(query);
 		return Response.ok().status(201).build();
-	}
-
-	//CHECKED
-	@DELETE
-	@Path("/students/{studentId}/sessions/{sessionId}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteAttendance(@PathParam("studentId") int studentId, @PathParam("sessionId") int sessionId) throws Exception{
-		String query = String.format("CALL DeleteAttendance('%s', '%s');", studentId, sessionId);
-		Util.executeQuery(query);
-		return Response.ok().status(204).build();	
 	}
 }
