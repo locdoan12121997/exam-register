@@ -17,7 +17,7 @@ public class Student {
 	
 	//CHECKED
 	@GET
-	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStudentList() throws Exception{
 		String query = "CALL GetStudents();";
 		JSONArray jsonArray = Main.getQueryArray(query);
