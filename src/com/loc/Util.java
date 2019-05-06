@@ -6,10 +6,6 @@ import org.json.JSONArray;
 
 import java.io.IOException;
 
-/**
- * Main class.
- *
- */
 public class Util {
     // Base URI the Grizzly HTTP server will listen on
     public static final String BASE_URI = "http://localhost:8080/myapp/";

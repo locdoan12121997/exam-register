@@ -20,7 +20,7 @@ public class Register {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSessionList() throws Exception{
 		String query = "CALL GetModuleSessions();";	
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 		
@@ -28,7 +28,7 @@ public class Register {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createRegister(com.model.Register register) throws Exception{
 		String query = String.format("CALL CreateRegister(%d, %d);", register.getStudentId(), register.getExamId());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 	
@@ -36,7 +36,7 @@ public class Register {
 	@Path("/{registerId}")
 	public Response deleteRegister(@PathParam("registerId") int registerId) throws Exception{
 		String query = String.format("CALL DeleteRegister(%d);", registerId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 }
