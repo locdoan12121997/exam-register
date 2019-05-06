@@ -357,7 +357,7 @@ END$$
 --  List all overlap module
 CREATE PROCEDURE GetOverlapModules()
 BEGIN
-    SELECT M1.*, M2.* FROM(
+    SELECT * FROM(
         SELECT S1.moduleId AS Module1Id,
             S1.id AS Session1Id,
             S1.sessionDate AS Date1,
@@ -370,9 +370,9 @@ BEGIN
             S2.toTime AS End2
         FROM ModuleSession S1, ModuleSession S2
         WHERE S1.id < S2.id AND
-            S1.sessionDate = S2.sessionDate AND ((
-                S1.fromTime < S2.fromTime AND S2.fromTime < S1.toTime)
-                OR (S2.fromTime < S1.fromTime AND S1.fromTime < S2.toTime)
+            S1.sessionDate = S2.sessionDate AND (
+            		(S1.fromTime <= S2.fromTime AND S2.fromTime < S1.toTime)
+			OR (S2.fromTime <= S1.fromTime AND S1.fromTime < S2.toTime)
             )
         ) as SS
 JOIN Module M1 ON SS.Module1Id = M1.id

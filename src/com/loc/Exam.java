@@ -53,10 +53,7 @@ public class Exam {
 	
 	@DELETE
 	@Path("/{examId}")
-<<<<<<< HEAD
 	@Produces(MediaType.APPLICATION_JSON)
-=======
->>>>>>> Thang
 	public Response deleteExam(@PathParam("examId") int examId) throws Exception{
 		String query = String.format("CALL DeleteExam(%d);", examId);
 		Main.executeQuery(query);
