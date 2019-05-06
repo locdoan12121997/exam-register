@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 
 public class Attendance {
 	@POST
-	@Path("/students/{studentId}/sessions/{sessionId}")
+	@Path("/attendances")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createAttendance(com.model.Attendance attendance) throws Exception{
 		String query = String.format("CALL CreateAttendance('%s', '%s');", attendance.getStudentId(), attendance.getSessionId());
