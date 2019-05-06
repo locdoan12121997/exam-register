@@ -24,7 +24,6 @@ public class Student {
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
-	
 	@GET
 	@Path("/{studentId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -82,7 +81,7 @@ public class Student {
 	public Response createStudentAccount(com.model.Student student) throws Exception{
 		String query = String.format("CALL CreateStudentAccount('%s', '%s', '%s', '%s', '%s');", student.getUserName(), student.getPassword(), student.getFirstName(), student.getLastName(), student.getCode());
 		Main.executeQuery(query);
-		return Response.ok().build();
+		return Response.ok().status(201).build();
 	}
 
 	//CHECKED
@@ -92,7 +91,7 @@ public class Student {
 	public Response deleteStudentAccount(@PathParam("studentId") int studentId) throws Exception{
 		String query = String.format("CALL DeleteStudentAccount(%d);", studentId);
 		Main.executeQuery(query);
-		return Response.ok().build();	
+		return Response.ok().status(204).build();	
 	}
 	
 }

@@ -63,7 +63,7 @@ public class Lecturer {
 	public Response createLecturerAccount(com.model.Lecturer lecturer) throws Exception{
 		String query = String.format("CALL CreateLecturerAccount('%s', '%s', '%s', '%s');", lecturer.getUserName(), lecturer.getPassword(), lecturer.getFirstName(), lecturer.getLastName());
 		Main.executeQuery(query);
-		return Response.ok().build();			
+		return Response.ok().status(201).build();			
 	}
 
 	@DELETE
@@ -72,7 +72,7 @@ public class Lecturer {
 	public Response deleteLecturerAccount(@FormParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL DeleteLecturerAccount(%d);", lecturerId);
 		Main.executeQuery(query);
-		return Response.ok().build();	
+		return Response.ok().status(204).build();	
 	}
 }
 

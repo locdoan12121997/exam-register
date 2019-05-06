@@ -71,7 +71,7 @@ public class Semester {
 	public Response createSemester(com.model.Semester semester) throws Exception{
 		String query = String.format("CALL CreateSemester('%s', '%s');", semester.getFromDate(), semester.getToDate());
 		Main.executeQuery(query);
-		return Response.ok().build();
+		return Response.ok().status(201).build();
 	}
 	
 	@DELETE
@@ -80,6 +80,6 @@ public class Semester {
 	public Response deleteSemester(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL DeleteSemester(%d);", semesterId);
 		Main.executeQuery(query);
-		return Response.ok().build();	
+		return Response.ok().status(204).build();	
 	}
 }

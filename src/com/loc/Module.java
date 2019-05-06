@@ -80,7 +80,7 @@ public class Module {
 	public Response createModule(com.model.Module module) throws Exception{
 		String query = String.format("CALL CreateModule('%s', '%s', %d);", module.getCode(), module.getName(), module.getSemesterId());
 		Main.executeQuery(query);
-		return Response.ok().build();
+		return Response.ok().status(201).build();
 	}
 	
 	@DELETE
@@ -89,6 +89,6 @@ public class Module {
 	public Response deleteModule(@PathParam("moduleId") int moduleId) throws Exception{
 		String query = String.format("CALL DeleteModule(%d);", moduleId);
 		Main.executeQuery(query);
-		return Response.ok().build();	
+		return Response.ok().status(204).build();	
 	}
 }

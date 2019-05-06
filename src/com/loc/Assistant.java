@@ -37,28 +37,19 @@ public class Assistant {
     }
 	
 	@POST
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response CreateAssistantAccount(@FormParam("username") String userName, @FormParam("password") String userPassword, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName) throws Exception{
-		String query = String.format("CALL CreateAssistantAccount('%s', '%s', '%s', '%s');", userName, userPassword, firstName, lastName);
+	@Consumes(MediaType.APPLICATION_JSON)
+    public Response CreateAssistantAccount(com.model.Assistant assistant) throws Exception{
+		String query = String.format("CALL CreateAssistantAccount('%s', '%s', '%s', '%s');", assistant.getUserName(), assistant.getPassword(), assistant.getFirstName(), assistant.getLastName());
         Main.executeQuery(query);
-        return Response.ok().build();
-    }
-
-    @PUT
-    @Path("/{assistantId}")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response UpdateAssistantAccount(@PathParam("assistantId") int assistantId, @FormParam("username") String userName, @FormParam("password") String userPassword, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName) throws Exception{
-    	String query = String.format("CALL CreateAssistantAccount('%s', '%s', '%s', '%s');", userName, userPassword, firstName, lastName);
-    	Main.executeQuery(query);
-    	return Response.ok().build();
+        return Response.ok().status(201).build();
     }
 	
 	@DELETE
 	@Path("/{assistantId}")
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Consumes(MediaType.APPLICATION_JSON)
     public Response DeleteAssistantAccount(@PathParam("assistantId") int assistantId) throws Exception{
 		String query = String.format("CALL DeleteAssistantAccount(%d);", assistantId);
 		Main.executeQuery(query);
-		return Response.ok().build();
+		return Response.ok().status(204).build();
     }
 }
