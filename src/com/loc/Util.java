@@ -58,8 +58,19 @@ public class Util {
     	}
     }
     
-    public static boolean isQualified(int examId) throws SQLException{
-    	return true;
+    public static boolean isQualified(int studentId, int moduleId) throws Exception{
+    	float percent = 0;
+    	try (Connection connection = establishConnection()){
+    		Statement statement = connection.createStatement();
+    		String query = String.format("CALL GetAttendancePercentByStudentIdModuleId(%d, %d);", studentId, moduleId);
+    		try (ResultSet resultSet = statement.executeQuery(query)){
+    			resultSet.next();
+    			percent = resultSet.getFloat("Percent");
+    			resultSet.close();
+    		}
+    		connection.close();
+    	}
+    	return percent >= 80;
     }
 }
 
