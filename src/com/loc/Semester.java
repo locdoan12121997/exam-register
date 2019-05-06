@@ -22,7 +22,7 @@ public class Semester {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSemesterList() throws Exception{
 		String query = "CALL GetSemesters();";	
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -31,7 +31,7 @@ public class Semester {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSemesterbyID(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL GetSemesterById(%d);", semesterId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();        
 	}
 	
@@ -42,7 +42,7 @@ public class Semester {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExambySemesterId(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL GetExamBySemesterId(%d);", semesterId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -53,7 +53,7 @@ public class Semester {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getModulesBySemesterId(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL GetModulesBySemesterId(%d)", semesterId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -62,7 +62,7 @@ public class Semester {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response UpdateSemester(com.model.Semester semester, @PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL UpdateSemester(%d, '%s', '%s');", semesterId, semester.getFromDate(), semester.getToDate());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().build();	
 	}
 	
@@ -70,7 +70,7 @@ public class Semester {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSemester(com.model.Semester semester) throws Exception{
 		String query = String.format("CALL CreateSemester('%s', '%s');", semester.getFromDate(), semester.getToDate());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 	
@@ -78,7 +78,7 @@ public class Semester {
 	@Path("/{semesterId}")
 	public Response deleteSemester(@PathParam("semesterId") int semesterId) throws Exception{
 		String query = String.format("CALL DeleteSemester(%d);", semesterId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 }

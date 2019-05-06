@@ -20,7 +20,7 @@ public class Session {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSessionList() throws Exception{
 		String query = "CALL GetModuleSessions();";	
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -29,7 +29,7 @@ public class Session {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getSessionById(@PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL GetModuleSessionById(%d);", sessionId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -38,7 +38,7 @@ public class Session {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateSession(com.model.Session  session, @PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL UpdateModuleSession(%d, '%s', '%s', '%s');", sessionId, session.getSessionDate(), session.getFromTime(), session.getToTime());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().build();	
 	}
 	
@@ -47,7 +47,7 @@ public class Session {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createSession(com.model.Session session) throws Exception{
 		String query = String.format("CALL CreateModuleSession('%s', '%s', '%s', %d);", session.getSessionDate(), session.getFromTime(), session.getToTime(),  session.getModuleId());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 	
@@ -55,7 +55,7 @@ public class Session {
 	@Path("/{sessionId}")
 	public Response deleteSession(@PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL DeleteModuleSession(%d);", sessionId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 }

@@ -14,7 +14,7 @@ public class Attendance {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createAttendance(com.model.Attendance attendance) throws Exception{
 		String query = String.format("CALL CreateAttendance('%s', '%s');", attendance.getStudentId(), attendance.getSessionId());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 
@@ -24,7 +24,7 @@ public class Attendance {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response deleteAttendance(@PathParam("studentId") int studentId, @PathParam("sessionId") int sessionId) throws Exception{
 		String query = String.format("CALL DeleteAttendance('%s', '%s');", studentId, sessionId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 }

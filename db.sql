@@ -385,7 +385,8 @@ BEGIN
     SELECT Student.*, Account.*
     FROM Student
     JOIN ModuleList ON Student.id = ModuleList.studentId
-    WHERE ModuleList.moduleId = moduleId;
+    JOIN Account ON Student.account_id = Account.id
+	WHERE ModuleList.moduleId = moduleId;
 END$$
 
 --  Get all modules

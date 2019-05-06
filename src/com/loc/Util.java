@@ -10,7 +10,7 @@ import java.io.IOException;
  * Main class.
  *
  */
-public class Main {
+public class Util {
     // Base URI the Grizzly HTTP server will listen on
     public static final String BASE_URI = "http://localhost:8080/myapp/";
     static final String DB_URL = "jdbc:mysql://localhost:3306/register_db?useSSL=false";

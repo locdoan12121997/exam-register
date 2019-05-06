@@ -25,7 +25,7 @@ public class Lecturer {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getLecturerById(@PathParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL GetLecturerById(%d);", lecturerId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 
@@ -34,7 +34,7 @@ public class Lecturer {
 	@Produces(MediaType.APPLICATION_JSON)
     public Response getLecturers() throws Exception{
 		String query = String.format("CALL GetLecturers();");
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
     	return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -45,7 +45,7 @@ public class Lecturer {
 	@Produces(MediaType.APPLICATION_JSON)
     public Response getModulesByLecturerId(@PathParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL GetModulesByLecturerId(%d);", lecturerId);
-        JSONArray jsonArray = Main.getQueryArray(query);
+        JSONArray jsonArray = Util.getQueryArray(query);
         return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -55,7 +55,7 @@ public class Lecturer {
 	@Produces(MediaType.APPLICATION_JSON)
     public Response getLecturerModuleSessionByLecturerIDModuleId(@PathParam("lecturerId") int lecturerId, @PathParam("moduleId") int moduleId) throws Exception{
 		String query = String.format("CALL GetModuleSessionByLecturerIDModuleId(%d, %d);", lecturerId, moduleId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 
@@ -64,7 +64,7 @@ public class Lecturer {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateLecturer(com.model.Lecturer lecturer, @PathParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL UpdateLecturer(%d, '%s', '%s', '%s', '%s');", lecturerId, lecturer.getUserName(), lecturer.getPassword(), lecturer.getFirstName(), lecturer.getLastName());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().build();
 	}
 	
@@ -72,7 +72,7 @@ public class Lecturer {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createLecturerAccount(com.model.Lecturer lecturer) throws Exception{
 		String query = String.format("CALL CreateLecturerAccount('%s', '%s', '%s', '%s');", lecturer.getUserName(), lecturer.getPassword(), lecturer.getFirstName(), lecturer.getLastName());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();			
 	}
 
@@ -80,7 +80,7 @@ public class Lecturer {
 	@Path("/{lecturerId}")
 	public Response deleteLecturerAccount(@PathParam("lecturerId") int lecturerId) throws Exception{
 		String query = String.format("CALL DeleteLecturerAccount(%d);", lecturerId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 }

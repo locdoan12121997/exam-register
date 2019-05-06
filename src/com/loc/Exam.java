@@ -18,7 +18,7 @@ public class Exam {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExamList() throws Exception{
 		String query = "CALL GetExams();";	
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -27,7 +27,7 @@ public class Exam {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExambyID(@PathParam("examId") int examId) throws Exception{
 		String query = String.format("CALL GetExamById(%d);", examId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -36,7 +36,7 @@ public class Exam {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateExam(@PathParam("examId") int examId, com.model.Exam exam) throws Exception{
 		String query = String.format("CALL UpdateExam(%d,'%s', '%s','%s', '%s');", examId, exam.getExamDate(), exam.getFromTime(), exam.getToTime(), exam.getDeadline());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().build();
 	}
 	
@@ -44,7 +44,7 @@ public class Exam {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createExam(com.model.Exam exam) throws Exception{
 		String query = String.format("CALL CreateExam('%s', '%s', '%s', '%s', %d);", exam.getExamDate(), exam.getFromTime(), exam.getToTime(), exam.getDeadline(), exam.getModuleId());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 	
@@ -53,7 +53,7 @@ public class Exam {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteExam(@PathParam("examId") int examId) throws Exception{
 		String query = String.format("CALL DeleteExam(%d);", examId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();
 	}
 }

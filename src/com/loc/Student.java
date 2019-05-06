@@ -20,7 +20,7 @@ public class Student {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStudentList() throws Exception{
 		String query = "CALL GetStudents();";
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -29,7 +29,7 @@ public class Student {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getEmployee(@PathParam("studentId") int studentId) throws Exception{
 		String query = String.format("CALL GetStudentById(%d);", studentId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -40,7 +40,7 @@ public class Student {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getModulesByStudentId(@PathParam("studentId") int studentId) throws Exception{
 		String query = String.format("CALL GetModulesByStudentId(%d);", studentId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -51,7 +51,7 @@ public class Student {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getModuleSessionByStudentIDModuleId(@PathParam("studentId") int studentId, @PathParam("moduleId") int moduleId) throws Exception{
         String query = String.format("CALL getModuleSessionByStudentIDModuleId(%d, %d);", studentId, moduleId);
-        JSONArray jsonArray = Main.getQueryArray(query);
+        JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 	
@@ -60,7 +60,7 @@ public class Student {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExamByStudentIDModuleId(@PathParam("studentId") int studentId, @PathParam("moduleId") int moduleId) throws Exception{
 		String query = String.format("CALL GetExamByStudentIDModuleId(%d, %d);", studentId, moduleId);
-		JSONArray jsonArray = Main.getQueryArray(query);
+		JSONArray jsonArray = Util.getQueryArray(query);
 		return Response.ok().entity(jsonArray.toString()).build();
 	}
 
@@ -70,7 +70,7 @@ public class Student {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateStudent(com.model.Student student, @PathParam("studentId") int studentId) throws Exception{
 		String query = String.format("CALL UpdateStudent(%d, '%s', '%s', '%s', '%s', '%s');", studentId, student.getUserName(), student.getPassword(), student.getFirstName(), student.getLastName(), student.getCode());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().build();
 	}
 
@@ -80,7 +80,7 @@ public class Student {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createStudentAccount(com.model.Student student) throws Exception{
 		String query = String.format("CALL CreateStudentAccount('%s', '%s', '%s', '%s', '%s');", student.getUserName(), student.getPassword(), student.getFirstName(), student.getLastName(), student.getCode());
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(201).build();
 	}
 
@@ -89,7 +89,7 @@ public class Student {
 	@Path("/{studentId}")
 	public Response deleteStudentAccount(@PathParam("studentId") int studentId) throws Exception{
 		String query = String.format("CALL DeleteStudentAccount(%d);", studentId);
-		Main.executeQuery(query);
+		Util.executeQuery(query);
 		return Response.ok().status(204).build();	
 	}
 	
