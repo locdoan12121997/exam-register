@@ -15,7 +15,7 @@ public class Util {
     public static final String BASE_URI = "http://localhost:8080/myapp/";
     static final String DB_URL = "jdbc:mysql://localhost:3306/register_db?useSSL=false";
     static final String USER = "root";
-    static final String PASS = "loc123";
+    static final String PASS = "password";
 
     public static Connection establishConnection() {
     	try {
