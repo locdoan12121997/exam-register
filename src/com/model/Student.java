@@ -3,6 +3,9 @@ package com.model;
 public class Student extends Account {
 	int id;
 	String code;
+	public Student() {
+		
+	}
 	public int getId() {
 		return id;
 	}

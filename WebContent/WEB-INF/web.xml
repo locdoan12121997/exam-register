@@ -17,4 +17,18 @@
         <servlet-name>exam-register</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
+    <filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+<welcome-file-list>
+<welcome-file>stu-update-form.html</welcome-file>
+<welcome-file>jsform.js</welcome-file>	
+<welcome-file>formstyle.css</welcome-file>
+<welcome-file>utils.js</welcome-file>
+</welcome-file-list>
 </web-app>

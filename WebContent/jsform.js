@@ -9,7 +9,7 @@ studentAccount.onload = function(){
     if (studentAccount.status === 200){
         
         stuadd = JSON.parse(studentAccount.responseText);
-        console.log(stuadd);
+        console.log("stuadd" + stuadd.toString());
 
         $('#f-name').val(stuadd[0].firstname);
         $('#l-name').val(stuadd[0].lastname);
@@ -34,36 +34,35 @@ studentAccount.onload = function(){
 
 
         	var jsondata = {
-        		'firstname': $('#f-name').val(),
-        		'lastname': $('#l-name').val(),
+        		'firstName': $('#f-name').val(),
+        		'lastName': $('#l-name').val(),
         		'code':$('#st-code').val(),
-        		'username':$('#username').val(),
-        		'userpassword':$('#password').val()
+        		'userName':$('#username').val(),
+        		'password':$('#password').val()
         	};
-        	console.log(jsondata);
+        	console.log("jsondata: " + JSON.stringify(jsondata));
         	
         	
 
+        	send('/exam-register/rest/students/1', 'PUT', jsondata);
+        	/*
         	$.ajax({
-        		url: 'http://localhost:8080/exam-register/rest/students/1',
-        		type:'PUT',
-   				crossDomain: true,
-   				headers: {  'Access-Control-Allow-Origin': 'http://localhost' },
-
-        		dataType:'json',
-
-        		
-        		success:function(){
-        			alert('nice');
-        			data: JSON.stringify(jsondata);
-        			
-        		},
-        		error:function(err){
-        			alert(err.message);
-
-        		}
+        		url: 	'/exam-register/rest/students/1',
+        		type:	'PUT',
+   				data: JSON.stringify(jsondata),
+   				headers: { 
+   			        'Accept': 'application/json',
+   			        'Content-Type': 'application/json' 
+   			    },
+   				
+   				success: function (data, text) {
+   			        alert("Ok");
+   			    },
+   			    error: function (request, status, error) {
+   			        alert(request.responseText);
+   			    }
         	})
-        	console.log(stuadd[0]);
+        	console.log(stuadd[0]);*/
         })
 
     }
