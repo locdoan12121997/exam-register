@@ -1,0 +1,59 @@
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="bulma.css">
+  	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  	<link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="my_js.js"></script>
+    <title>Login form</title>
+    
+  </head>
+  <body>
+  	<div class="login-box">
+    <img src="img/vgulogo.png" class="avatar">
+    <h1>Login</h1>
+            <form>
+            <input type="text" id="email" name="email" placeholder="Email">
+            <input type="password" id="psw" name="password" placeholder="Enter Password"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required>
+            <input type="submit" onclick="check(this.form)" name="submit" value="Login">
+
+            <div class="right">
+            <a onclick="forgot()" id="contact">Forget Password?</a>    
+            </div>
+
+            </form>
+
+        </div>
+  </body>
+</html>
+<script>
+  function check(form){
+	  console.log(document.getElementById("email").value + " " + document.getElementById("psw").value);
+    if(document.getElementById("email").value=="Student" &&document.getElementById("psw").value =="123456"){
+      window.close('login.html');
+      window.open('studentmodule.html?studentId=1');
+    }
+    else if(document.getElementById("email").value=="Katleen" &&document.getElementById("psw").value =="123456"){
+        window.close('login.html');
+        window.open('studentmodule.html?studentId=2');
+      }
+    else if(document.getElementById("email").value=="Lars" &&document.getElementById("psw").value =="123456"){
+        window.close('login.html');
+        window.open('studentmodule.html?studentId=3');
+      }
+    else if(document.getElementById("email").value=="Lars" &&document.getElementById("psw").value =="123456"){
+        window.close('login.html');
+        window.open('semester.html');
+      }
+    else{
+      alert("Wrong email or Password !!! please try again")
+    }
+  }
+</script>
+<script>
+  function forgot() {
+    alert("Please contact ****@vgu.edu.vn for more information");
+  }
+</script>

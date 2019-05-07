@@ -13,7 +13,7 @@ studentAccount.onload = function(){
 
         $('#f-name').val(stuadd[0].firstname);
         $('#l-name').val(stuadd[0].lastname);
-        $('#st-code').val(stuadd[0].code)  ;
+        $('#st-code').val(stuadd[0].code);
         $('#username').val(stuadd[0].username) ;
         $('#password').val(stuadd[0].userpassword) ;
 

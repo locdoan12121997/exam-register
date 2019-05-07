@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="bulma.css">
+  <link rel="stylesheet" src=" /style/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="studentexam.js"></script>
+
+</head>
+
+
+<body>
+  <div id="app">
+    <!-- Top Navbar -->
+    <nav class="nav has-shadow">
+      <div class="container">
+        <div class="nav-left">
+          <a class="nav-item">
+        Website
+      </a>
+        </div>
+        <label for="menu-toggle" class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+        <input type="checkbox" id="menu-toggle" class="is-hidden" />
+        <div class="nav-right nav-menu">
+          <a class="nav-item is-tab is-hidden-tablet">
+        <span class="icon"><i class="fa fa-home"></i></span> Home
+      </a>
+          <a class="nav-item is-tab is-hidden-tablet">
+        <span class="icon"><i class="fa fa-table"></i></span>Semester
+      </a>
+          <a class="nav-item is-tab is-hidden-tablet">
+        <span class="icon"><i class="fa fa-info"></i></span> About
+      </a>
+
+          <a class="nav-item is-tab is-active">
+        <span class="icon"><i class="fa fa-user"></i></span>
+      </a>
+          <a class="nav-item is-tab">
+        <span class="icon"><i class="fa fa-sign-out"></i></span>
+      </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- End of Navbar -->
+
+    <!-- Sidebar + Content -->
+    <section class="main-content columns is-fullheight">
+
+      <!-- Sidebar -->
+
+      <aside class="column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile">
+        <p class="menu-label is-hidden-touch">Navigation</p>
+        <ul class="menu-list">
+          <li>
+            <a href="#" class="">
+          <span class="icon"><i class="fa fa-home"></i></span> Home
+        </a>
+          </li>
+          <li>
+            <a href="#" class=""  onclick="toSemester()">
+          Semester
+        </a>
+            <ul>
+              <li>
+                <a href="#" class=""  onclick="toModule()">
+          Module
+          </a>
+
+                <!-- Session -->
+                <ul>
+                  <li>
+                    <a href="#" class="module-child", onclick="toSession()">           
+                      Session
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="module-child is-active">
+                      Exam
+                    </a>
+                  </li>
+
+                  <!--End of Session-->
+              </li>
+              </ul>
+            </ul>
+            <!-- End of Module -->
+          </li>
+
+          <!-- End of Semester -->
+          <li>
+            <a href="">
+            Lecturer
+          </a>
+          </li>
+          <li>
+            <a href="">
+            Student
+          </a>
+          </li>
+          <li>
+            <a href="#" class="">
+          <span class="icon"><i class="fa fa-info"></i></span> About
+        </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End of sidebar -->
+      <!-- Content -->
+      <div class="container column is-10">
+        <div class="section">
+          
+          <p id="showData"></p>
+          
+    
+        </div>
+        <div id="formContainer">
+                <!-- Popup Div Starts Here -->
+                <div id="popupContact">
+                  <!-- Add Exam Form -->
+              
+                  <button id="close" class="fas fa-window-close" onclick="div_hide()"></button>
+                  <form>
+                        <h2 class="title has-text-centered is-1 has-text-light">Creating Exam Form</h2>
+            
+                    <!-- Date -->
+                    <div class="field is-horizontal">
+                      <div class="field-label is-normal">
+                        <label class="label">Date</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field is-expanded">
+                          <div class="control">
+                            <input type="date" class="input" name="date" required></input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Time -->
+                    <div class="field is-horizontal">
+                      <div class="field-label is-normal">
+                        <label class="label">Time</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field is-grouped is-expanded">
+                          <p class="label">From</p>
+                          <p class="control time-field">
+                            <input class="input" type="time" name="start" required></input>
+                          </p>
+                          <p class="label">To</p>
+                          <p class="control time-field">
+                            <input class="input" type="time" name="end" required></input>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+            
+                    <!-- Location -->
+                    <div class="field is-horizontal">
+                      <div class="field-label is-normal">
+                        <label class="label">Room
+                </label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field is-expanded">
+                          <div class="control">
+                            <input type="text" class="input" name="room"></input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            
+                    <!--Deadline-->
+                    <div class="field is-horizontal">
+                      <div class="field-label is-normal">
+                        <label class="label">Deadline
+                </label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field is-expanded">
+                          <div class="">
+                            <input type="date" class="input" name="deadline"></input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="has-text-centered">
+                      <button class="button is-primary" onclick="check_empty()" type="submit">Submit</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- Popup Div Ends Here -->
+              </div>
+              <!-- Display Popup Button -->
+              <button id="popup" onclick="div_show()" >Add Exam</button>
+      </div>
+
+    </section>
+
+  </div>
+</body>
+
+</html>

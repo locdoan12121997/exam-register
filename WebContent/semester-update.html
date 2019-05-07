@@ -4,8 +4,11 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="formstyle.css">
-    <script src="stu-update-form.js"></script>
-    <script src="utils.js"></script>
+    <script src="semester-update.js"></script>
+    <script src="../utils.js"></script>
+
+
+
 </head>
 <body>
 
@@ -14,27 +17,16 @@
 
 <div class="form-popup" id="add-form">
   <form class="form-container">
-    <h1>update student</h1>
-    <lable>f-name</lable>
-    <br>
-    <input type="text" id="f-name">
+    <h1>Semester</h1>
     <br/>
-    <lable>st-code</lable>
+    <lable>from-date</lable>
     <br>
-    <input type="text" id="st-code" >
+    <input type="text" id="f-name" >
     <br>
-    <lable>username</lable>
+    <lable>to-date</lable>
     <br>
     <input type="text" id="username" >
     <br>
-    <lable>password</lable>
-    <br>
-    <input type="text" id="password" >
-    <br>
-    <label>l-name</label>
-    <br>
-    <input type="text" id="l-name">
-    <br/>
     <button type="button" id="edit">Update</button>
     <button type="button" id="create">Create</button>
     <button type="button" id="btn-cancel" onclick="closeForm()">Close</button>
